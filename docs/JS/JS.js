@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const lactoseIntolerantCheckbox = document.getElementById("lactoseIntolerantCheckbox");
   const categoryDropdown = document.getElementById("categoria");
   const orderDropdown = document.getElementById("orden");
-  const filtersContainer = document.getElementById("filters"); // Agregado
+  const filtersContainer = document.getElementById("filters"); // Corregido
 
   // Obtener los filtros y favoritos almacenados en localStorage
   const storedFilters = JSON.parse(localStorage.getItem("filters")) || {};
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showMenu() {
     qrCodeContainer.style.display = "none";
     menuContainer.style.display = "block";
-    filtersContainer.style.display = "block"; // Corregido
+    filtersContainer.style.display = "flex"; // Ajustado a "flex" ya que en tu CSS usas flexbox
   }
 
   // Agregar evento al código QR para mostrar el menú
