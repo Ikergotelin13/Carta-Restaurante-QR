@@ -201,12 +201,3 @@ document.addEventListener("DOMContentLoaded", function () {
   // Agregar evento al código QR para mostrar el menú
   qrCodeContainer.addEventListener("click", showMenu);
 });
-
-var qrcode = new QRCode(document.getElementById("qrcode"), {
-  text: "https://ikergotelin13.github.io/Carta-Restaurante-QR/",
-  width: 256,
-  height: 256,
-  colorDark: "#000000",
-  colorLight: "#ffffff",
-  correctLevel: QRCode.CorrectLevel.H
-});
