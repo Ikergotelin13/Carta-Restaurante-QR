@@ -26,7 +26,6 @@ main {
 
 #main-container {
   position: relative; /* Añadido */
-  background-color: white;
   text-align: center;
 }
 
@@ -44,7 +43,6 @@ main {
   bottom: 0;
   display: none;
   z-index: 1;
-  background-color: white;
 }
 
 .card {
