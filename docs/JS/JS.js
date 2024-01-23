@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const qrCodeContainer = document.getElementById("qrcode-container");
-  const menuContainer = document.getElementById("menu");
-  const favoritesContainer = document.getElementById("favoritesList");
-  const favoritesCheckbox = document.getElementById("favoritesCheckbox");
-  const applyFiltersBtn = document.getElementById("applyFiltersBtn");
   const veganCheckbox = document.getElementById("veganCheckbox");
   const celiacCheckbox = document.getElementById("celiacCheckbox");
   const lactoseIntolerantCheckbox = document.getElementById("lactoseIntolerantCheckbox");
   const categoryDropdown = document.getElementById("categoria");
   const orderDropdown = document.getElementById("orden");
-  const filtersContainer = document.getElementById("filters"); // Corregido
+  const menuContainer = document.getElementById("menu");
+  const favoritesContainer = document.getElementById("favoritesList");
+  const favoritesCheckbox = document.getElementById("favoritesCheckbox");
+  const applyFiltersBtn = document.getElementById("applyFiltersBtn");
 
   // Obtener los filtros y favoritos almacenados en localStorage
   const storedFilters = JSON.parse(localStorage.getItem("filters")) || {};
@@ -22,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
   categoryDropdown.value = storedFilters.category || "all";
   orderDropdown.value = storedFilters.order || "";
 
-  applyFiltersBtn.addEventListener("click", handleFilterChange);
 
   // Simulación de datos con un archivo JSON
   const apiUrl = "https://raw.githubusercontent.com/Ikergotelin13/Archivo-JSON/main/Comida.json";
@@ -187,17 +184,23 @@ document.addEventListener("DOMContentLoaded", function () {
   orderDropdown.addEventListener("change", handleFilterChange);
   favoritesCheckbox.addEventListener("change", handleFilterChange);
 
-  // Inicializar la página mostrando solo el código QR
-  renderMenu();  // No renderizará el menú, solo configurará los eventos
-  renderFavorites();  // No renderizará la lista de favoritos
+  // Inicializar la página renderizando la carta y la lista de favoritos
+  renderMenu();
+  renderFavorites();
 
-  // Mostrar el menú después de escanear el código QR
-  function showMenu() {
-    qrCodeContainer.style.display = "none";
-    menuContainer.style.display = "block";
-    filtersContainer.style.display = "flex"; // Ajustado a "flex" ya que en tu CSS usas flexbox
+  // Función para manejar los cambios en los filtros
+  function handleFilterChange() {
+    const filters = {
+      vegan: veganCheckbox.checked,
+      celiac: celiacCheckbox.checked,
+      lactoseIntolerant: lactoseIntolerantCheckbox.checked,
+      category: categoryDropdown.value,
+      order: orderDropdown.value,
+    };
+    localStorage.setItem("filters", JSON.stringify(filters));
+
+    // Renderizar la carta y la lista de favoritos con los nuevos filtros
+    renderMenu();
+    renderFavorites();
   }
-
-  // Agregar evento al código QR para mostrar el menú
-  qrCodeContainer.addEventListener("click", showMenu);
 });
